@@ -6,6 +6,7 @@
     "ajv": "^6.2.1",
     "antd": "^3.2.3",
     "bootstrap": "^4.0.0",
+    "choreographer-js": "^1.1.0",
     "firebase": "^4.10.1",
     "jquery": "^3.3.1",
     "popper.js": "^1.12.9",
