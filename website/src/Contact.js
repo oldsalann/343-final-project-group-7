@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { HashRouter as Router, Route, Link, Switch, withRouter } from "react-router-dom";
+import { HashRouter as Router, Route, Link, Switch, Redirect } from "react-router-dom";
 import firebase from 'firebase';
 import mapboxgl from 'mapbox-gl'
 import ReactMapboxGl, { Layer, Feature, Popup } from "react-mapbox-gl";
@@ -9,6 +9,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
+import avatar from './img/avatar.jpg'
 
 
 
@@ -25,6 +26,7 @@ export class Contact extends Component {
       subject:'',
       message:'',
       form: {},
+      signin: false
     };
   }
 
@@ -55,9 +57,9 @@ export class Contact extends Component {
             console.log(err);
             this.setState({ errorMessage: err.message })
         }).then(
-            () => {
-              this.props.push('/Admin');
-            }
+            this.setState({
+              signin: true
+            })
           );
   }
 
@@ -114,6 +116,10 @@ export class Contact extends Component {
       return null;
     }
 
+    if (this.state.signin) {
+      return <Redirect to="/Admin"/>
+    }
+
     
 
     return(
@@ -128,7 +134,7 @@ export class Contact extends Component {
                         right:0}}>
             <CardHeader
               title={<h2 style={{fontFamily: 'Dancing Script'}}>SAY HELLO... </h2>}
-              avatar="images/jsa-128.jpg"
+              avatar={avatar}
               style={{marginTop:20, marginLeft:20, marginBottum: 20, marginRight: 20}}
             />
             <CardText style={{marginTop:5, marginLeft:20, marginBottum: 20, marginRight: 20}}>

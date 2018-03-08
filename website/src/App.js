@@ -94,7 +94,7 @@ class App extends Component {
                     <Route exact path="/" component={Homepage} />
                     <Route path="/Profile" component={Portfolio} />
                     <Route path="/Upload" component={About} />
-                    <Route path="/Contact" render={() => this.renderContact()} />
+                    <Route path="/Contact" render={(props) => this.renderContact(props)} />
                     <Route path="/Admin" component={Admin} />
                   </Switch>
                 </div>
@@ -105,6 +105,7 @@ class App extends Component {
     );
   }
 }
+
 
 // for visual purposes
 class Nav extends Component {
