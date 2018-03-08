@@ -78,6 +78,37 @@ class Contact extends Component {
       return null;
     }
 
+    if (this.state.open) {
+      return(
+        <MuiThemeProvider> 
+         <Dialog
+              title="Admin login"
+              actions={actions}
+              modal={false}
+              open={this.state.open}
+              onRequestClose={this.handleClose}
+            >
+              The actions in this window were passed in as an array of React objects.
+              <TextField 
+                hintText="email"
+                floatingLabelText="Email"
+                name='email'
+                value={this.state.email}
+                onChange={(event) => { this.handleChange(event) }}
+              /><br/>
+              <TextField
+                hintText="password"
+                floatingLabelText ="password"
+                type="password" 
+                name="password"
+                value={this.state.password}
+                onChange={(event) => { this.handleChange(event) }}
+              />
+            </Dialog> 
+        </MuiThemeProvider>
+      )
+    }
+
     return(
       <MuiThemeProvider>
         <div>
