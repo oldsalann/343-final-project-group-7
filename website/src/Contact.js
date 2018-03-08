@@ -1,17 +1,23 @@
 import React, { Component } from 'react';
+import firebase from 'firebase';
 import mapboxgl from 'mapbox-gl'
 import ReactMapboxGl, { Layer, Feature, Popup } from "react-mapbox-gl";
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
+import Dialog from 'material-ui/Dialog';
+import FlatButton from 'material-ui/FlatButton';
 
 
 class Contact extends Component {
   constructor(props){
     super(props)
     this.state = {
-      loading:true
+      loading:true,
+      open: false,
+      email: '',
+      password: '',
     };
   }
 
@@ -19,12 +25,55 @@ class Contact extends Component {
     setTimeout(() => this.setState({ loading: false }), 1500);
   }
 
+  handleOpen = () => {
+    this.setState({open: true});
+  };
+
+  handleClose = () => {
+    this.setState({open: false});
+  };
+
+  handleChange(event) {
+    let value = event.target.value;
+    let field = event.target.name;
+    let change = {};
+    change[field] = value;
+    console.log(change);
+    this.setState(change);
+  }
+
+  handleSignIn(email, password) {
+    firebase.auth().signInWithEmailAndPassword(email, password)
+        .catch(err => {
+            console.log(err);
+            this.setState({ errorMessage: err.message })
+        }).then(
+            () => {
+              this.props.history.push('/Admin');
+            }
+          );
+  }
 
   render() {
     const Map = ReactMapboxGl({
       accessToken: "pk.eyJ1IjoiaGlkZS0iLCJhIjoiY2plZ2JxYjk2MDJ5NTJ3cGl5bnFobXkxaiJ9.ia8SLIYusJpY5XT9_wjvIA"
     });
 
+    const actions = [
+      <FlatButton
+        label="Cancel"
+        primary={true}
+        onClick={this.handleClose}
+      />,
+      <FlatButton
+        label="Submit"
+        primary={true}
+        keyboardFocused={true}
+        onClick={() => this.handleSignIn(this.state.email, this.state.password) }
+      />,
+    ];
+
+    
     if (this.state.loading) {
       return null;
     }
@@ -89,6 +138,31 @@ class Contact extends Component {
               />
             </CardText>
             <RaisedButton label={<a style={{fontFamily: 'Dancing Script'}}>Submit <i className="far fa-paper-plane"></i></a>} style={{marginTop:5, marginLeft:30, marginBottum: 30, marginRight: 30}}/>
+            <RaisedButton label={<a style={{fontFamily: 'Dancing Script'}}>Admin</a>} onClick={this.handleOpen} />
+            <Dialog
+              title="Admin login"
+              actions={actions}
+              modal={false}
+              open={this.state.open}
+              onRequestClose={this.handleClose}
+            >
+              The actions in this window were passed in as an array of React objects.
+              <TextField 
+                hintText="email"
+                floatingLabelText="Email"
+                name='email'
+                value={this.state.email}
+                onChange={(event) => { this.handleChange(event) }}
+              /><br/>
+              <TextField
+                hintText="password"
+                floatingLabelText ="password"
+                type="password" 
+                name="password"
+                value={this.state.password}
+                onChange={(event) => { this.handleChange(event) }}
+              />
+            </Dialog>
           </Card>
         </div>
       </MuiThemeProvider>

@@ -7,6 +7,7 @@ import firebase from 'firebase';
 import { Form, Icon, Input, Button, Checkbox } from 'antd';
 import Contact  from './Contact';
 import { About } from './About';
+import Admin from './Admin';
 import { Homepage } from './Homepage';
 import { Portfolio } from './Portfolio';
 
@@ -55,6 +56,7 @@ class App extends Component {
                     <Route path="/Profile" component={Portfolio} />
                     <Route path="/Upload" component={About} />
                     <Route path="/Contact" component={Contact} />
+                    <Route path="/Admin" component={Admin} />
                   </Switch>
                 </div>
               </div>
