@@ -19,13 +19,24 @@ class Contact extends Component {
       adminMail: '',
       password: '',
       name: '',
-      userMail: '',
-
+      email: '',
+      subject:'',
+      message:'',
+      form: {}
     };
   }
 
   componentDidMount() {
     setTimeout(() => this.setState({ loading: false }), 1500);
+    
+    let db = firebase.database().ref('form');
+    db.on('value', function (snap) {
+      let channels = [];
+      snap.forEach(function (childNodes) {
+          channels.push(childNodes.key);
+
+      });
+    })
   }
 
   handleOpen = () => {
@@ -37,11 +48,11 @@ class Contact extends Component {
   };
 
   handleChange(event) {
+    event.preventDefault();
     let value = event.target.value;
     let field = event.target.name;
     let change = {};
     change[field] = value;
-    console.log(change);
     this.setState(change);
   }
 
@@ -55,6 +66,31 @@ class Contact extends Component {
               this.props.history.push('/Admin');
             }
           );
+  }
+
+  postForm(e) {
+    e.preventDefault();
+    const formRef = firebase.database().ref('form');
+    const form = {
+      name: this.state.name,
+      email: this.state.email,
+      time: firebase.database.ServerValue.TIMESTAMP,
+      subject: this.state.subject,
+      message: this.state.message,
+    }
+    console.log(form)
+    formRef.push(form);
+    this.clearMessage();
+  }
+
+  clearMessage() {
+    this.setState({
+        name: '',
+        email: '',
+        time:'',
+        subject:'',
+        message:''
+    });
   }
 
   render() {
@@ -152,15 +188,24 @@ class Contact extends Component {
               <TextField
                 hintText="Name"
                 floatingLabelText="Name"
+                name='name'
+                value={this.state.name}
+                onChange={(event) => { this.handleChange(event) }}
               />
               <TextField
                 hintText="Email"
                 floatingLabelText="Email"
+                name='email'
+                value={this.state.email}
+                onChange={(event) => { this.handleChange(event) }}
               />
               <TextField
                 hintText="Subject"
                 fullWidth={true}
                 floatingLabelText="Subject"
+                name='subject'
+                value={this.state.subject}
+                onChange={(event) => { this.handleChange(event) }}
               />
               <TextField
                 hintText="Message"
@@ -169,9 +214,12 @@ class Contact extends Component {
                 fullWidth={true}
                 rows={3}
                 rowsMax={3}
+                name='message'
+                value={this.state.message}
+                onChange={(event) => { this.handleChange(event) }}
               />
             </CardText>
-            <RaisedButton label={<a style={{fontFamily: 'Dancing Script'}}>Submit <i className="far fa-paper-plane"></i></a>} style={{marginTop:5, marginLeft:30, marginBottum: 30, marginRight: 30}}/>
+            <RaisedButton label={<a style={{fontFamily: 'Dancing Script'}}>Submit <i className="far fa-paper-plane"></i></a>} style={{marginTop:5, marginLeft:30, marginBottum: 30, marginRight: 30}} onClick={(e) => this.postForm(e) }/>
             <RaisedButton label={<a style={{fontFamily: 'Dancing Script'}}>Admin</a>} onClick={this.handleOpen} />
             <Dialog
               title="Admin login"
