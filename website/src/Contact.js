@@ -16,8 +16,11 @@ class Contact extends Component {
     this.state = {
       loading:true,
       open: false,
-      email: '',
+      adminMail: '',
       password: '',
+      name: '',
+      userMail: '',
+
     };
   }
 
@@ -42,8 +45,8 @@ class Contact extends Component {
     this.setState(change);
   }
 
-  handleSignIn(email, password) {
-    firebase.auth().signInWithEmailAndPassword(email, password)
+  handleSignIn(adminMail, password) {
+    firebase.auth().signInWithEmailAndPassword(adminMail, password)
         .catch(err => {
             console.log(err);
             this.setState({ errorMessage: err.message })
@@ -69,7 +72,7 @@ class Contact extends Component {
         label="Submit"
         primary={true}
         keyboardFocused={true}
-        onClick={() => this.handleSignIn(this.state.email, this.state.password) }
+        onClick={() => this.handleSignIn(this.state.adminMail, this.state.password) }
       />,
     ];
 
@@ -92,8 +95,8 @@ class Contact extends Component {
               <TextField 
                 hintText="email"
                 floatingLabelText="Email"
-                name='email'
-                value={this.state.email}
+                name='adminMail'
+                value={this.state.adminMail}
                 onChange={(event) => { this.handleChange(event) }}
               /><br/>
               <TextField
@@ -106,7 +109,7 @@ class Contact extends Component {
               />
             </Dialog> 
         </MuiThemeProvider>
-      )
+      );
     }
 
     return(
@@ -181,8 +184,8 @@ class Contact extends Component {
               <TextField 
                 hintText="email"
                 floatingLabelText="Email"
-                name='email'
-                value={this.state.email}
+                name='adminMail'
+                value={this.state.adminMail}
                 onChange={(event) => { this.handleChange(event) }}
               /><br/>
               <TextField
