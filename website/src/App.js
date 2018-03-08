@@ -5,7 +5,7 @@ import 'antd/dist/antd.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import firebase from 'firebase';
 import { Form, Icon, Input, Button, Checkbox } from 'antd';
-import { Contact } from './Contact';
+import Contact  from './Contact';
 import { About } from './About';
 import { Homepage } from './Homepage';
 import { Portfolio } from './Portfolio';
@@ -49,12 +49,12 @@ class App extends Component {
                     </ul>
                   </div>
                 </nav>
-                <div className='container-fluid'>
+                <div className='container-fluid' style={{padding:0}}>
                   <Switch>
                     <Route exact path="/" component={Homepage} />
                     <Route path="/Profile" component={Portfolio} />
                     <Route path="/Upload" component={About} />
-                    <Route path="/Upload" component={Contact} />
+                    <Route path="/Contact" component={Contact} />
                   </Switch>
                 </div>
               </div>
