@@ -28,15 +28,6 @@ class Contact extends Component {
 
   componentDidMount() {
     setTimeout(() => this.setState({ loading: false }), 1500);
-    
-    let db = firebase.database().ref('form');
-    db.on('value', function (snap) {
-      let channels = [];
-      snap.forEach(function (childNodes) {
-          channels.push(childNodes.key);
-
-      });
-    })
   }
 
   handleOpen = () => {
