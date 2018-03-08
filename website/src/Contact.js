@@ -10,7 +10,8 @@ import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 
 
-class Contact extends Component {
+
+export class Contact extends Component {
   constructor(props){
     super(props)
     this.state = {
@@ -22,7 +23,7 @@ class Contact extends Component {
       email: '',
       subject:'',
       message:'',
-      form: {}
+      form: {},
     };
   }
 
@@ -103,65 +104,21 @@ class Contact extends Component {
       />,
     ];
 
-    
+    var valueLink = {
+      value: this.state.name,
+      requestChange: this.handleChange
+    };
+
     if (this.state.loading) {
       return null;
     }
 
-    if (this.state.open) {
-      return(
-        <MuiThemeProvider> 
-         <Dialog
-              title="Admin login"
-              actions={actions}
-              modal={false}
-              open={this.state.open}
-              onRequestClose={this.handleClose}
-            >
-              The actions in this window were passed in as an array of React objects.
-              <TextField 
-                hintText="email"
-                floatingLabelText="Email"
-                name='adminMail'
-                value={this.state.adminMail}
-                onChange={(event) => { this.handleChange(event) }}
-              /><br/>
-              <TextField
-                hintText="password"
-                floatingLabelText ="password"
-                type="password" 
-                name="password"
-                value={this.state.password}
-                onChange={(event) => { this.handleChange(event) }}
-              />
-            </Dialog> 
-        </MuiThemeProvider>
-      );
-    }
+    
 
     return(
       <MuiThemeProvider>
         <div>
-          <Map
-            style="mapbox://styles/hide-/cjei9kt8x1tmj2smilcc8cb5e"
-            containerStyle={{
-              height: "100vh",
-              width: "100vw",
-              position: "absolute"
-            }}
-            center={
-              [-122.200676,47.610378]
-            }
-            >
-              <Popup
-                coordinates={[-122.335167,47.608013]}
-                offset={{
-                  'bottom-left': [12, -38],  'bottom': [0, -38], 'bottom-right': [-12, -38]
-                }}
-                >
-                <h3 style={{fontFamily: 'Dancing Script'}}>Bryan Nakata</h3>
-              </Popup>
-          </Map>
+          
           <Card style={{position:"fixed",
                         margin:100,
                         width:"40vw",
@@ -235,13 +192,11 @@ class Contact extends Component {
                 value={this.state.password}
                 onChange={(event) => { this.handleChange(event) }}
               />
-            </Dialog>
+            </Dialog> 
           </Card>
         </div>
       </MuiThemeProvider>
     );
   }
 }
-
-export default Contact;
 
