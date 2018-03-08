@@ -71,6 +71,8 @@ export class Contact extends Component {
               })
           }
       })
+      this.clearMessage();
+      
   }
 
   postForm(e) {
@@ -94,7 +96,9 @@ export class Contact extends Component {
         email: '',
         time:'',
         subject:'',
-        message:''
+        message:'',
+        adminMail:'',
+        password:''
     });
   }
 
