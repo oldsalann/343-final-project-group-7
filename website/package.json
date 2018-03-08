@@ -8,13 +8,19 @@
     "bootstrap": "^4.0.0",
     "choreographer-js": "^1.1.0",
     "firebase": "^4.10.1",
+    "google-map-react": "^0.32.0",
     "jquery": "^3.3.1",
+    "mapbox-gl": "^0.44.1",
     "popper.js": "^1.12.9",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
+    "react-link-state": "^0.1.2",
+    "react-map-gl": "^3.2.4",
+    "react-maps": "^0.4.0",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
-    "react-scripts": "1.1.1"
+    "react-scripts": "1.1.1",
+    "react-table": "^6.8.0"
   },
   "scripts": {
     "start": "react-scripts start",
