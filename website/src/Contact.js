@@ -16,17 +16,16 @@ class Contact extends Component {
   }
 
   componentDidMount() {
-    setTimeout(() => this.setState({ loading: false }), 3000);
+    setTimeout(() => this.setState({ loading: false }), 1500);
   }
+
 
   render() {
     const Map = ReactMapboxGl({
       accessToken: "pk.eyJ1IjoiaGlkZS0iLCJhIjoiY2plZ2JxYjk2MDJ5NTJ3cGl5bnFobXkxaiJ9.ia8SLIYusJpY5XT9_wjvIA"
     });
 
-    const { loading } = this.state;
-
-    if (loading) {
+    if (this.state.loading) {
       return null;
     }
 
@@ -34,7 +33,7 @@ class Contact extends Component {
       <MuiThemeProvider>
         <div>
           <Map
-            style="mapbox://styles/mapbox/light-v9"
+            style="mapbox://styles/hide-/cjei9kt8x1tmj2smilcc8cb5e"
             containerStyle={{
               height: "100vh",
               width: "100vw",
@@ -48,8 +47,9 @@ class Contact extends Component {
                 coordinates={[-122.335167,47.608013]}
                 offset={{
                   'bottom-left': [12, -38],  'bottom': [0, -38], 'bottom-right': [-12, -38]
-                }}>
-                <h1>Popup</h1>
+                }}
+                >
+                <h3 style={{fontFamily: 'Dancing Script'}}>Bryan Nakata</h3>
               </Popup>
           </Map>
           <Card style={{position:"fixed",
@@ -60,27 +60,35 @@ class Contact extends Component {
             <CardHeader
               title={<h2 style={{fontFamily: 'Dancing Script'}}>SAY HELLO... </h2>}
               avatar="images/jsa-128.jpg"
-              style={{margin:20}}
+              style={{marginTop:20, marginLeft:20, marginBottum: 20, marginRight: 20}}
             />
-            <CardText style={{margin:20}}>
-              <p>Email</p>
+            <CardText style={{marginTop:5, marginLeft:20, marginBottum: 20, marginRight: 20}}>
+              <p style={{fontFamily: 'Dancing Script'}}>Email : </p>
               <br></br>
-              <p>Phone</p>
+              <p style={{fontFamily: 'Dancing Script'}}>Phone : </p>
               <TextField
                 hintText="Name"
                 floatingLabelText="Name"
-              /><br/>
+              />
               <TextField
                 hintText="Email"
                 floatingLabelText="Email"
-              /><br/>
+              />
               <TextField
                 hintText="Subject"
+                fullWidth={true}
                 floatingLabelText="Subject"
-              /><br/>
-              
+              />
+              <TextField
+                hintText="Message"
+                floatingLabelText="Message"
+                multiLine={true}
+                fullWidth={true}
+                rows={3}
+                rowsMax={3}
+              />
             </CardText>
-            <RaisedButton label={<a style={{fontFamily: 'Dancing Script'}}>Submit <i class="far fa-paper-plane"></i></a>} style={{margin:30}}/>
+            <RaisedButton label={<a style={{fontFamily: 'Dancing Script'}}>Submit <i className="far fa-paper-plane"></i></a>} style={{marginTop:5, marginLeft:30, marginBottum: 30, marginRight: 30}}/>
           </Card>
         </div>
       </MuiThemeProvider>
