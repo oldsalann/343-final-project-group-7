@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { HashRouter as Router, Route, Link, Switch } from "react-router-dom";
+import { HashRouter as Router, Route, Link, Switch, Redirect } from "react-router-dom";
 import './App.css';
 import 'antd/dist/antd.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -29,37 +29,38 @@ class App extends Component {
     
   }
 
+
   renderContact() {
     const Map = ReactMapboxGl({
       accessToken: "pk.eyJ1IjoiaGlkZS0iLCJhIjoiY2plZ2JxYjk2MDJ5NTJ3cGl5bnFobXkxaiJ9.ia8SLIYusJpY5XT9_wjvIA"
     });
     return (
       <div>
-        <Map
-          style="mapbox://styles/hide-/cjei9kt8x1tmj2smilcc8cb5e"
-          containerStyle={{
-            height: "100vh",
-            width: "100vw",
-            position: "absolute",
-            zIndex: -100
-          }}
-          center={
-            [-122.200676,47.610378]
-          }
-          >
-            <Popup
-              coordinates={[-122.335167,47.608013]}
-              offset={{
-                'bottom-left': [12, -38],  'bottom': [0, -38], 'bottom-right': [-12, -38]
-              }}
-              >
-              <h3 style={{fontFamily: 'Dancing Script'}}>Bryan Nakata</h3>
-            </Popup>
-        </Map>
+        <Router>
+          <Map
+            style="mapbox://styles/hide-/cjei9kt8x1tmj2smilcc8cb5e"
+            containerStyle={{
+              height: "100vh",
+              width: "100vw",
+              position: "absolute",
+            }}
+            center={
+              [-122.200676,47.610378]
+            }
+            >
+              <Popup
+                coordinates={[-122.335167,47.608013]}
+                offset={{
+                  'bottom-left': [12, -38],  'bottom': [0, -38], 'bottom-right': [-12, -38]
+                }}
+                >
+                <h3 style={{fontFamily: 'Dancing Script'}}>Bryan Nakata</h3>
+              </Popup>
+          </Map>
+        </Router>
         <Contact></Contact>
       </div>
     );
-
   }
 
   // renders router and navbar

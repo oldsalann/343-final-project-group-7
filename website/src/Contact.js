@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { HashRouter as Router, Route, Link, Switch, withRouter } from "react-router-dom";
 import firebase from 'firebase';
 import mapboxgl from 'mapbox-gl'
 import ReactMapboxGl, { Layer, Feature, Popup } from "react-mapbox-gl";
@@ -55,7 +56,7 @@ export class Contact extends Component {
             this.setState({ errorMessage: err.message })
         }).then(
             () => {
-              this.props.history.push('/Admin');
+              this.props.push('/Admin');
             }
           );
   }
@@ -117,6 +118,7 @@ export class Contact extends Component {
 
     return(
       <MuiThemeProvider>
+        <Router>
         <div>
           
           <Card style={{position:"fixed",
@@ -195,6 +197,7 @@ export class Contact extends Component {
             </Dialog> 
           </Card>
         </div>
+        </Router>
       </MuiThemeProvider>
     );
   }
