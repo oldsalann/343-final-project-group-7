@@ -52,9 +52,9 @@ class App extends Component {
                 <div className='container-fluid'>
                   <Switch>
                     <Route exact path="/" component={Homepage} />
-                    <Route path="/Profile" component={Portfolio} />
-                    <Route path="/Upload" component={About} />
-                    <Route path="/Upload" component={Contact} />
+                    <Route path="/Portfolio" component={Portfolio} />
+                    <Route path="/About" component={About} />
+                    <Route path="/Contact" component={Contact} />
                   </Switch>
                 </div>
               </div>
