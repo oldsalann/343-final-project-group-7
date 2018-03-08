@@ -23,6 +23,7 @@ export class Contact extends Component {
       password: '',
       name: '',
       email: '',
+      time: '',
       subject:'',
       message:'',
       form: {},
