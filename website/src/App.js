@@ -94,10 +94,14 @@ class App extends Component {
                 <div className='container-fluid' style={{padding:0}}>
                   <Switch>
                     <Route exact path="/" component={Homepage} />
+
                     <Route path="/Profile" component={Portfolio} />
                     <Route path="/Upload" component={About} />
                     <Route path="/Contact" render={(props) => this.renderContact(props)} />
                     <Route path="/Admin" component={Admin} />
+                    <Route path="/Portfolio" component={Portfolio} />
+                    <Route path="/About" component={About} />
+                    <Route path="/Contact" component={Contact} />
                   </Switch>
                 </div>
               </div>
