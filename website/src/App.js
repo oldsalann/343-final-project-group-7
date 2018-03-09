@@ -12,6 +12,8 @@ import { Homepage } from './Homepage';
 import { Portfolio } from './Portfolio';
 import mapboxgl from 'mapbox-gl'
 import ReactMapboxGl, { Layer, Feature, Popup } from "react-mapbox-gl";
+import ReactTable from "react-table";
+import "react-table/react-table.css";
 
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;

@@ -9,7 +9,10 @@ import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
-import avatar from './img/avatar.jpg'
+import avatar from './img/avatar.jpg';
+import ReactTable from "react-table";
+import "react-table/react-table.css";
+
 
 
 
@@ -57,11 +60,20 @@ export class Contact extends Component {
         .catch(err => {
             console.log(err);
             this.setState({ errorMessage: err.message })
-        }).then(
-            this.setState({
-              signin: true
-            })
-          );
+        })
+    firebase.auth().onAuthStateChanged(firebaseuser => {
+          if (firebaseuser) {
+              this.setState({
+                  signin:true
+              })
+          } else {
+              this.setState({
+                  signin:false
+              })
+          }
+      })
+      this.clearMessage();
+      
   }
 
   postForm(e) {
@@ -85,7 +97,9 @@ export class Contact extends Component {
         email: '',
         time:'',
         subject:'',
-        message:''
+        message:'',
+        adminMail:'',
+        password:''
     });
   }
 
