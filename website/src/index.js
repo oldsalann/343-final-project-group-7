@@ -4,7 +4,6 @@ import { HashRouter as Router, Route, Link, Switch } from "react-router-dom";
 import './App.css';
 import 'antd/dist/antd.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
-import firebase from 'firebase';
 import { Form, Icon, Input, Button, Checkbox } from 'antd';
 import './index.css';
 import App from './App';

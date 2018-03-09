@@ -134,14 +134,14 @@ export class Contact extends Component {
                         height:"80vh",
                         right:0}}>
             <CardHeader
-              title={<h2 style={{fontFamily: 'Dancing Script'}}>SAY HELLO... </h2>}
+              title={<h2 style={{fontFamily: 'Philosopher'}}>SAY HELLO... </h2>}
               avatar={avatar}
               style={{marginTop:20, marginLeft:20, marginBottum: 20, marginRight: 20}}
             />
             <CardText style={{marginTop:5, marginLeft:20, marginBottum: 20, marginRight: 20}}>
-              <p style={{fontFamily: 'Dancing Script'}}>Email : </p>
+              <p style={{fontFamily: 'Philosopher'}}>Email : </p>
               <br></br>
-              <p style={{fontFamily: 'Dancing Script'}}>Phone : </p>
+              <p style={{fontFamily: 'Philosopher'}}>Phone : </p>
               <TextField
                 hintText="Name"
                 floatingLabelText="Name"
@@ -176,8 +176,8 @@ export class Contact extends Component {
                 onChange={(event) => { this.handleChange(event) }}
               />
             </CardText>
-            <RaisedButton label={<a style={{fontFamily: 'Dancing Script'}}>Submit <i className="far fa-paper-plane"></i></a>} style={{marginTop:5, marginLeft:30, marginBottum: 30, marginRight: 30}} onClick={(e) => this.postForm(e) }/>
-            <RaisedButton label={<a style={{fontFamily: 'Dancing Script'}}>Admin</a>} onClick={this.handleOpen} />
+            <RaisedButton label={<a style={{fontFamily: 'Philosopher'}}>Submit <i className="far fa-paper-plane"></i></a>} style={{marginTop:5, marginLeft:30, marginBottum: 30, marginRight: 30}} onClick={(e) => this.postForm(e) }/>
+            <RaisedButton label={<a style={{fontFamily: 'Philosopher'}}>Admin</a>} onClick={this.handleOpen} />
             <Dialog
               title="Admin login"
               actions={actions}

@@ -54,7 +54,7 @@ class App extends Component {
                   'bottom-left': [12, -38],  'bottom': [0, -38], 'bottom-right': [-12, -38]
                 }}
                 >
-                <h3 style={{fontFamily: 'Dancing Script'}}>Bryan Nakata</h3>
+                <h3 style={{fontFamily: 'Philosopher'}}>Bryan Nakata</h3>
               </Popup>
           </Map>
         </Router>
@@ -79,13 +79,13 @@ class App extends Component {
                   </button>
                   <div className='collapse navbar-collapse' id='navbarNav'>
                     <ul className='navbar-nav mr-auto'>
-                      <li className='navbar-brand mr-3' id='font'>Bryan Nakata</li>
+                      <li style={{fontFamily: 'Philosopher'}} className='navbar-brand mr-3' id='font'>Bryan Nakata</li>
                     </ul>
                     <ul className='navbar-nav mr-right'>
-                      <li className='nav-item mr-3 mt-auto mb-auto'><Link to="/" className="brand">Home</Link></li>
-                      <li className='nav-item mr-3 mt-auto mb-auto'><Link to="/About" className="brand">About</Link></li>
-                      <li className='nav-item mr-3 mt-auto mb-auto'><Link to="/Contact" className="brand">Contact</Link></li>
-                      <li className='nav-item mt-auto mb-auto'><Link to="/Portfolio" className="brand">Portfolio</Link></li>
+                      <li style={{fontFamily: 'Philosopher'}} className='nav-item mr-3 mt-auto mb-auto'><Link to="/" className="brand">Home</Link></li>
+                      <li style={{fontFamily: 'Philosopher'}} className='nav-item mr-3 mt-auto mb-auto'><Link to="/About" className="brand">About</Link></li>
+                      <li style={{fontFamily: 'Philosopher'}} className='nav-item mr-3 mt-auto mb-auto'><Link to="/Contact" className="brand">Contact</Link></li>
+                      <li style={{fontFamily: 'Philosopher'}} className='nav-item mt-auto mb-auto'><Link to="/Portfolio" className="brand">Portfolio</Link></li>
                     </ul>
                   </div>
                 </nav>
