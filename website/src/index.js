@@ -8,7 +8,7 @@ import { Form, Icon, Input, Button, Checkbox } from 'antd';
 import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
-
+import firebase from 'firebase'
 
 let config = {
     apiKey: "AIzaSyBt9jzrid526vBoZy5RCtsSqTScEFvDgtA",

@@ -128,7 +128,7 @@ export class Contact extends Component {
     };
 
     if (this.state.loading) {
-      return null;
+      return <div style={{backgroudColor:'white', width:'100%', height:'100%' }}></div>;
     }
 
     if (this.state.signin) {
