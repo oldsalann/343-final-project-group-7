@@ -7,6 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import { Form, Icon, Input, Button, Checkbox } from 'antd';
 import './index.css';
 import App from './App';
+import firebase from 'firebase';
 import registerServiceWorker from './registerServiceWorker';
 
 
