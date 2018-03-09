@@ -69,6 +69,7 @@ export class AboutCard extends Component {
               <div>  
                 <Card style={{position:"fixed",
                               margin:100,
+                              marginTop: 50,
                               width:"40vw",
                               height:"80vh",
                               right:0}}>
@@ -78,8 +79,16 @@ export class AboutCard extends Component {
                     style={{marginTop:20, marginLeft:20, marginBottum: 20, marginRight: 20}}
                   />
                   <CardText style={{marginTop:5, marginLeft:20, marginBottum: 20, marginRight: 20}}>
-                    <p> Hi, my name is Bryan Nakata and I am a 3rd year student at the University of Washington. I am majoring
-                        in the communications program and this is my website... </p>
+                    <p>
+                    Hello!
+                    <br></br>
+                    <br></br>
+                    &ensp;&ensp;&ensp;&ensp;&ensp;
+                    My name is Bryan Nakata and I&#39;ve been working in photography and film ever since my freshman year of high school. I have completed five media related courses: photography, multimedia film, and three years of broadcast media. In addition, I have taken college courses such as Digital Cinema Production. By the age of 15, I had already started producing a full length documentary film. The film premiered two years later to over 300 people, raising over $4,000 in DVD sales for my school. Along with this work, I also have done numerous projects in both photography and film. My work has been even featured on the Facebook pages of the University of Washington and the Seattle Seahawks.             
+                    <br></br>
+                    &ensp;&ensp;&ensp;&ensp;&ensp;
+                    Currently I am studying at the University of Washington and majoring in communications journalism. I also work as a digital media producer at the University of Washington, Seattle Seahawks and in the summer, CBS Seattle. In my current and past jobs, I have created videos on multiple topics such as highlighting undocumented student immigrants, covering MLK week, telling the stories of students, filming football stars, and more. As a photographer, I do events, creative images along with portraits. If you are looking for a hardworking photographer or cinematographer with plenty of experience and a positive attitude, please contact me. Thank you for looking at my page and I hope to hear from you soon!
+                    </p>
                    
                     
                   </CardText>

@@ -130,6 +130,7 @@ export class Contact extends Component {
           
           <Card style={{position:"fixed",
                         margin:100,
+                        marginTop: 50,
                         width:"40vw",
                         height:"80vh",
                         right:0}}>

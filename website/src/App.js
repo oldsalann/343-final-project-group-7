@@ -4,7 +4,7 @@ import './App.css';
 import 'antd/dist/antd.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import firebase from 'firebase';
-import { Form, Icon, Input, Button, Checkbox } from 'antd';
+import { Form, Icon, Input, Button, Checkbox, Menu } from 'antd';
 import { Contact } from './Contact';
 import { About } from './About';
 import Admin from './Admin';
@@ -13,6 +13,8 @@ import { Portfolio } from './Portfolio';
 import mapboxgl from 'mapbox-gl'
 import ReactMapboxGl, { Layer, Feature, Popup } from "react-mapbox-gl";
 
+const SubMenu = Menu.SubMenu;
+const MenuItemGroup = Menu.ItemGroup;
 
 
 // main app controlling all components
@@ -20,15 +22,9 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      
+      current: 'home'
     }
   }
-
-  // authorize user
-  componentDidMount() {
-    
-  }
-
 
   renderContact() {
     const Map = ReactMapboxGl({
@@ -63,6 +59,13 @@ class App extends Component {
     );
   }
 
+  handleClick = (e) => {
+    console.log('click ', e);
+    this.setState({
+      current: e.key,
+    });
+  }
+
   // renders router and navbar
   render() {
     const Map = ReactMapboxGl({
@@ -73,6 +76,7 @@ class App extends Component {
           <div>
             <Router>
               <div>
+                {/*
                 <nav className="navbar fixed-top navbar-expand-md navbar-toggleable-md navbar-dark bg-dark">
                   <button type="button" className="navbar-toggler" data-toggle="collapse" data-target="#navbarNav">
                   <span className="navbar-toggler-icon"></span>
@@ -89,10 +93,30 @@ class App extends Component {
                     </ul>
                   </div>
                 </nav>
+                */}
+                
+                <Menu 
+                    onClick={this.handleClick}
+                    selectedKeys={[this.state.current]}
+                    mode="horizontal"
+                >
+                  <Menu.Item key="home">
+                    <Link style={{display: 'inline-block'}} to="/" className="brand">Bryan Nakata</Link>
+                  </Menu.Item>
+                  <Menu.Item style={{float: 'right'}} key="contact">
+                    <Icon type="form" /><Link style={{display: 'inline-block'}}to="/Contact" className="brand">Contact</Link>
+                  </Menu.Item>
+                  <Menu.Item style={{float: 'right', display: 'inline-block'}}key="about">
+                    <Icon type="user" /><Link style={{display: 'inline-block'}} to="/About" className="brand">About</Link>
+                  </Menu.Item>
+                
+                  <Menu.Item style={{float: 'right'}} key="portfolio">
+                    <Icon type="picture" /><Link style={{display: 'inline-block'}} to="/Portfolio" className="brand">Portfolio</Link>
+                  </Menu.Item>
+                </Menu>
                 <div className='container-fluid' style={{padding:0}}>
                   <Switch>
                     <Route exact path="/" component={Homepage} />
-
                     <Route path="/Profile" component={Portfolio} />
                     <Route path="/Upload" component={About} />
                     <Route path="/Contact" render={(props) => this.renderContact(props)} />
