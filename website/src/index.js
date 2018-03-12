@@ -9,7 +9,7 @@ import './index.css';
 import App from './App';
 import firebase from 'firebase';
 import registerServiceWorker from './registerServiceWorker';
-import firebase from 'firebase'
+//import firebase from 'firebase'
 
 let config = {
     apiKey: "AIzaSyBt9jzrid526vBoZy5RCtsSqTScEFvDgtA",
