@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import firebase from 'firebase';
 import { Form, Icon, Input, Button, Checkbox } from 'antd';
 import AtvImg from 'react-img-atv';
+import { withRouter } from 'react-router-dom';
 
 
 const rootDivStyle = {
@@ -17,12 +18,18 @@ const rootDivStyle = {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+    cursor: 'pointer',
   };
   
-  export class Homepage extends React.Component {
+  export class Homepage extends Component {
+
+    handleClick = () => {
+        this.props.history.push("/Portfolio");
+    }
+
     render() {
       return(
-        <div style={rootDivStyle}>
+        <div style={rootDivStyle} onClick={this.handleClick}>
           { <AtvImg
             layers={[
               'https://firebasestorage.googleapis.com/v0/b/info343-final-1383b.appspot.com/o/images%2F28821832_10211716205724476_361433538_o.jpg?alt=media&token=6253d35f-90f9-428d-8e74-53eb745f423f',
@@ -33,16 +40,8 @@ const rootDivStyle = {
             className={'thisIsOptional'}
             style={{ width: 900, height: 300 }}
           />    }
-          {/* <MtSvgLines
-                animate={ true }
-                duration={ 5000 }
-                stagger={ 100 }
-                timing="ease-in"
-                playback="forwards"
-              >
-                <SvgSignature />
-          </MtSvgLines> */}
         </div>
       )}
   }
   
+  export default withRouter(Homepage)

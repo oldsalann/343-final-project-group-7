@@ -1,24 +1,3 @@
-.overflow-scroll-gradient {
-    position: relative;
-}
-
-.overflow-scroll-gradient::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    width: 40vw;
-    height: 25px;
-    background: linear-gradient( rgba(255, 255, 255, 0.001), white);
-    /* transparent keyword is broken in Safari */
-    pointer-events: none;
-}
-
-.overflow-scroll-gradient__scroller {
-    overflow-y: scroll;
-    background: white;
-    width: 40vw;
-    height: 80vh;
-    padding: 15px 0;
-    line-height: 1.2;
-    text-align: left;
+p {
+    overflow: hidden;
 }
