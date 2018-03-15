@@ -17,6 +17,7 @@
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-images": "^0.5.17",
+    "react-img-atv": "^1.0.2",
     "react-link-state": "^0.1.2",
     "react-map-gl": "^3.2.4",
     "react-mapbox-gl": "^3.8.0",
