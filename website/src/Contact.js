@@ -5,6 +5,7 @@ import mapboxgl from 'mapbox-gl'
 import ReactMapboxGl, { Layer, Feature, Popup } from "react-mapbox-gl";
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import Dialog from 'material-ui/Dialog';
@@ -20,7 +21,6 @@ export class Contact extends Component {
   constructor(props){
     super(props)
     this.state = {
-      loading:true,
       open: false,
       adminMail: '',
       password: '',
@@ -29,25 +29,28 @@ export class Contact extends Component {
       time: '',
       subject:'',
       message:'',
+      repeatPassword:'',
       form: {},
-      signin: false
+      signin: false,
+      submitted: false,
+      fill : true,
     };
+    this.handleSubmit = this.handleSubmit.bind(this);
+    
   }
 
-  componentDidMount() {
-    setTimeout(() => this.setState({ loading: false }), 1500);
-  }
-
+  // Open admin login form 
   handleOpen = () => {
     this.setState({open: true});
   };
 
+  // Close admin login form  
   handleClose = () => {
     this.setState({open: false});
   };
 
+  // Change form value depend on the user input 
   handleChange(event) {
-    event.preventDefault();
     let value = event.target.value;
     let field = event.target.name;
     let change = {};
@@ -55,6 +58,27 @@ export class Contact extends Component {
     this.setState(change);
   }
 
+  // Show success submit button 
+  handleSubmit() {
+    this.setState({ submitted: true }, () => {
+        setTimeout(() => this.setState({ submitted: false }), 5000);
+    });
+  }
+
+  // Validation for the user fill out everything 
+  fillOut() {
+    if (this.state.name == '' || this.state.email == '' || this.state.subject == '' || this.state.message == '') {
+      this.setState({ fill: false }, () => {
+        setTimeout(() => this.setState({ fill: true }), 5000);
+    });
+    } else {
+      this.setState({
+        fill : true
+      });
+    }
+  }
+
+  // Sign in admin page 
   handleSignIn(adminMail, password) {
     firebase.auth().signInWithEmailAndPassword(adminMail, password)
         .catch(err => {
@@ -76,8 +100,14 @@ export class Contact extends Component {
       
   }
 
+  // Add form information to database 
   postForm(e) {
     e.preventDefault();
+    this.fillOut()
+    if (this.state.name == '' || this.state.email == '' || this.state.subject == '' || this.state.message == '') {
+      return null;
+    }
+    this.handleSubmit()
     const formRef = firebase.database().ref('form');
     const form = {
       name: this.state.name,
@@ -91,6 +121,7 @@ export class Contact extends Component {
     this.clearMessage();
   }
 
+  // reflesh message after submit 
   clearMessage() {
     this.setState({
         name: '',
@@ -99,7 +130,18 @@ export class Contact extends Component {
         subject:'',
         message:'',
         adminMail:'',
-        password:''
+        password:'',
+        repeatPassword: '',
+    });
+  }
+
+  // Password match function 
+  componentWillMount() {
+    ValidatorForm.addValidationRule('isPasswordMatch', (value) => {
+        if (value !== this.state.password) {
+            return false;
+        }
+        return true;
     });
   }
 
@@ -115,7 +157,7 @@ export class Contact extends Component {
         onClick={this.handleClose}
       />,
       <FlatButton
-        label="Submit"
+        label="Login"
         primary={true}
         keyboardFocused={true}
         onClick={() => this.handleSignIn(this.state.adminMail, this.state.password) }
@@ -126,10 +168,6 @@ export class Contact extends Component {
       value: this.state.name,
       requestChange: this.handleChange
     };
-
-    if (this.state.loading) {
-      return null;
-    }
 
     if (this.state.signin) {
       return <Redirect to="/Admin"/>
@@ -146,40 +184,50 @@ export class Contact extends Component {
                         margin:100,
                         marginTop: 50,
                         width:"40vw",
-                        height:"80vh",
+                        height:"85vh",
                         right:0}}>
             <CardHeader
               title={<h2 style={{fontFamily: 'Philosopher'}}>SAY HELLO... </h2>}
               avatar={avatar}
               style={{marginTop:20, marginLeft:20, marginBottum: 20, marginRight: 20}}
             />
+            <ValidatorForm
+                ref="form"
+            >
             <CardText style={{marginTop:5, marginLeft:20, marginBottum: 20, marginRight: 20}}>
               <p style={{fontFamily: 'Philosopher'}}>Email : </p>
               <br></br>
               <p style={{fontFamily: 'Philosopher'}}>Phone : </p>
-              <TextField
+              <TextValidator
                 hintText="Name"
                 floatingLabelText="Name"
                 name='name'
                 value={this.state.name}
                 onChange={(event) => { this.handleChange(event) }}
+                validators={['required']}
+                errorMessages={['this field is required']}
               />
-              <TextField
+              <TextValidator
+                floatingLabelText="Email"
                 hintText="Email"
                 floatingLabelText="Email"
                 name='email'
                 value={this.state.email}
                 onChange={(event) => { this.handleChange(event) }}
-              />
-              <TextField
+                validators={['required', 'isEmail']}
+                errorMessages={['this field is required', 'email is not valid']}
+                />
+              <TextValidator
                 hintText="Subject"
                 fullWidth={true}
                 floatingLabelText="Subject"
                 name='subject'
                 value={this.state.subject}
                 onChange={(event) => { this.handleChange(event) }}
+                validators={['required']}
+                errorMessages={['this field is required']}
               />
-              <TextField
+              <TextValidator
                 hintText="Message"
                 floatingLabelText="Message"
                 multiLine={true}
@@ -189,10 +237,21 @@ export class Contact extends Component {
                 name='message'
                 value={this.state.message}
                 onChange={(event) => { this.handleChange(event) }}
+                validators={['required']}
+                errorMessages={['this field is required']}
               />
             </CardText>
-            <RaisedButton label={<a style={{fontFamily: 'Philosopher'}}>Submit <i className="far fa-paper-plane"></i></a>} style={{marginTop:5, marginLeft:30, marginBottum: 30, marginRight: 30}} onClick={(e) => this.postForm(e) }/>
+            <RaisedButton label={
+                              (!this.state.fill && <a style={{fontFamily: 'Philosopher', color: "red"}}>Fill out everything! <i className="far fa-paper-plane"></i></a>)
+                              ||(this.state.submitted && <a style={{fontFamily: 'Philosopher'}}>Your form is Submitted! <i className="far fa-paper-plane"></i></a>)
+                              || (!this.state.submitted && <a style={{fontFamily: 'Philosopher'}}>Submit <i className="far fa-paper-plane"></i></a>) 
+                              
+                          }
+                          disabled={this.state.submitted} 
+                          style={{marginTop:5, marginLeft:30, marginBottum: 30, marginRight: 30}} 
+                          onClick={(e) => this.postForm(e) }/>
             <RaisedButton label={<a style={{fontFamily: 'Philosopher'}}>Admin</a>} onClick={this.handleOpen} />
+            </ValidatorForm>
             <Dialog
               title="Admin login"
               actions={actions}
@@ -200,22 +259,41 @@ export class Contact extends Component {
               open={this.state.open}
               onRequestClose={this.handleClose}
             >
-              The actions in this window were passed in as an array of React objects.
-              <TextField 
+              Only Staff can login this page 
+              <ValidatorForm
+                ref="form"
+                onSubmit={this.handleSubmit}
+              >
+              <TextValidator
                 hintText="email"
                 floatingLabelText="Email"
                 name='adminMail'
                 value={this.state.adminMail}
                 onChange={(event) => { this.handleChange(event) }}
-              /><br/>
-              <TextField
+                validators={['required', 'isEmail']}
+                errorMessages={['this field is required', 'email is not valid']}
+                /><br/>
+              <TextValidator
                 hintText="password"
                 floatingLabelText ="password"
                 type="password" 
                 name="password"
                 value={this.state.password}
                 onChange={(event) => { this.handleChange(event) }}
-              />
+                validators={['required']}
+                errorMessages={['this field is required']}
+                /><br/>
+              <TextValidator
+                floatingLabelText="Repeat password"
+                value={this.state.repeatPassword}
+                onChange={(event) => { this.handleChange(event) }}
+                name="repeatPassword"
+                type="password"
+                validators={['isPasswordMatch', 'required']}
+                errorMessages={['password mismatch', 'this field is required']}
+                    
+                />
+              </ValidatorForm>
             </Dialog> 
           </Card>
         </div>

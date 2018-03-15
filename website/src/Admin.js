@@ -10,6 +10,7 @@ import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import ReactTable from "react-table";
 import "react-table/react-table.css";
+import ImageUploader from 'react-firebase-image-uploader';
 
 
 class Admin extends Component {
@@ -17,10 +18,14 @@ class Admin extends Component {
     constructor(props) {
         super(props) 
         this.state ={
-            data:[]
+            data:[],
+            progress: 0,
+            isUploading: false,
+            submitted: false,
         }
     }
 
+    // get data from firebase database 
     componentDidMount() {
         this.dataRef = firebase.database().ref('form/');
         let datas = []
@@ -38,6 +43,7 @@ class Admin extends Component {
         console.log(this.state.data);
     }
 
+    // Sign out control 
     handleSignOut() {
         firebase.auth().signOut().then(
             () => {
@@ -46,13 +52,70 @@ class Admin extends Component {
         );
     }
 
+    // Image upload 
+    handleUploadStart = () => this.setState({isUploading: true, progress: 0})
+
+    // Image upload progress 
+    handleProgress = (progress) => this.setState({progress})
+
+    // Catch error whem uoloading image
+    handleUploadError = (error) => {
+        this.setState({isUploading: false});
+        console.error(error);
+    }
+
+    //  Success upload
+    handleUploadSuccess = (filename) => {
+        this.setState({progress: 100, isUploading: false});
+        
+    }
+
+
 
     render() {
 
         return(
         <MuiThemeProvider>
-            <Card style={{margin:100}}>
+            <Card style={{margin:50}}>
+                <CardHeader
+                    title={<h1 style={{fontFamily: 'Philosopher'}}>Administration Page</h1>}
+                    style={{marginTop:10, marginLeft:10, marginBottum: 10, marginRight: 10}}
+                    />
+                
+                <CardHeader
+                    title={<h2 style={{fontFamily: 'Philosopher'}}>Photo uploader</h2>}
+                    style={{marginTop:10, marginLeft:10, marginBottum: 10, marginRight: 10}}
+                    />
+                <CardText>
+                <div>
+                <label style={{backgroundColor: 'steelblue', color: 'white', padding: 10, borderRadius: 4, pointer: 'cursor'}}>
+                        {this.state.submitted &&
+                            <p>Success!</p>
+                        }
+                        {this.state.isUploading &&
+                            <p>Progress: {this.state.progress}</p>
+                        }
+                        <ImageUploader
+                            storageRef={firebase.storage().ref('images')}
+                            onUploadStart={this.handleUploadStart}
+                            onUploadError={this.handleUploadError}
+                            onUploadSuccess={this.handleUploadSuccess}
+                            onProgress={this.handleProgress}
+                        />
+                        <RaisedButton 
+                          label= "submit"
+                          type="submit"
+                          disabled={this.state.submitted} 
+                          style={{marginTop:5, marginLeft:0, marginBottum: 30, marginRight: 30}} 
+                          />
+                </label>
+                </div>
+                </CardText>
             <div>
+                <CardHeader
+                    title={<h2 style={{fontFamily: 'Philosopher'}}>Form List</h2>}
+                    style={{marginTop:10, marginLeft:10, marginBottum: 10, marginRight: 10}}
+                    />
                 <CardText>
                     <MakeDataTable data={this.state.data}></MakeDataTable>
                 </CardText>
@@ -66,6 +129,7 @@ class Admin extends Component {
     }
 }
 
+// Create data table 
 class MakeDataTable extends Component {
     render(){
         return(

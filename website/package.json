@@ -16,6 +16,8 @@
     "popper.js": "^1.14.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
+    "react-firebase-image-uploader": "^1.1.0",
+    "react-image": "^1.3.1",
     "react-images": "^0.5.17",
     "react-img-atv": "^1.0.2",
     "react-link-state": "^0.1.2",
