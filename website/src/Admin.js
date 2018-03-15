@@ -70,7 +70,7 @@ class Admin extends Component {
 
         return(
         <MuiThemeProvider>
-            <Card style={{margin:100}}>
+            <Card style={{margin:50}}>
                 <CardHeader
                     title={<h1 style={{fontFamily: 'Philosopher'}}>Administration Page</h1>}
                     style={{marginTop:10, marginLeft:10, marginBottum: 10, marginRight: 10}}

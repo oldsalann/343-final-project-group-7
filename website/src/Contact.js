@@ -29,9 +29,11 @@ export class Contact extends Component {
       time: '',
       subject:'',
       message:'',
+      repeatPassword:'',
       form: {},
       signin: false,
       submitted: false,
+      fill : true,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     
@@ -60,6 +62,18 @@ export class Contact extends Component {
     });
   }
 
+  fillOut() {
+    if (this.state.name == '' || this.state.email == '' || this.state.subject == '' || this.state.message == '') {
+      this.setState({ fill: false }, () => {
+        setTimeout(() => this.setState({ fill: true }), 5000);
+    });
+    } else {
+      this.setState({
+        fill : true
+      });
+    }
+  }
+
   handleSignIn(adminMail, password) {
     firebase.auth().signInWithEmailAndPassword(adminMail, password)
         .catch(err => {
@@ -83,6 +97,11 @@ export class Contact extends Component {
 
   postForm(e) {
     e.preventDefault();
+    this.fillOut()
+    if (this.state.name == '' || this.state.email == '' || this.state.subject == '' || this.state.message == '') {
+      return null;
+    }
+    this.handleSubmit()
     const formRef = firebase.database().ref('form');
     const form = {
       name: this.state.name,
@@ -104,7 +123,17 @@ export class Contact extends Component {
         subject:'',
         message:'',
         adminMail:'',
-        password:''
+        password:'',
+        repeatPassword: '',
+    });
+  }
+
+  componentWillMount() {
+    ValidatorForm.addValidationRule('isPasswordMatch', (value) => {
+        if (value !== this.state.password) {
+            return false;
+        }
+        return true;
     });
   }
 
@@ -156,7 +185,6 @@ export class Contact extends Component {
             />
             <ValidatorForm
                 ref="form"
-                onSubmit={this.handleSubmit}
             >
             <CardText style={{marginTop:5, marginLeft:20, marginBottum: 20, marginRight: 20}}>
               <p style={{fontFamily: 'Philosopher'}}>Email : </p>
@@ -206,8 +234,10 @@ export class Contact extends Component {
               />
             </CardText>
             <RaisedButton label={
-                              (this.state.submitted && <a style={{fontFamily: 'Philosopher'}}>Your form is Submitted! <i className="far fa-paper-plane"></i></a>)
-                              || (!this.state.submitted && <a style={{fontFamily: 'Philosopher'}}>Submit <i className="far fa-paper-plane"></i></a>)
+                              (!this.state.fill && <a style={{fontFamily: 'Philosopher', color: "red"}}>Fill out everything! <i className="far fa-paper-plane"></i></a>)
+                              ||(this.state.submitted && <a style={{fontFamily: 'Philosopher'}}>Your form is Submitted! <i className="far fa-paper-plane"></i></a>)
+                              || (!this.state.submitted && <a style={{fontFamily: 'Philosopher'}}>Submit <i className="far fa-paper-plane"></i></a>) 
+                              
                           }
                           disabled={this.state.submitted} 
                           style={{marginTop:5, marginLeft:30, marginBottum: 30, marginRight: 30}} 
@@ -244,6 +274,16 @@ export class Contact extends Component {
                 onChange={(event) => { this.handleChange(event) }}
                 validators={['required']}
                 errorMessages={['this field is required']}
+                /><br/>
+              <TextValidator
+                floatingLabelText="Repeat password"
+                value={this.state.repeatPassword}
+                onChange={(event) => { this.handleChange(event) }}
+                name="repeatPassword"
+                type="password"
+                validators={['isPasswordMatch', 'required']}
+                errorMessages={['password mismatch', 'this field is required']}
+                    
                 />
               </ValidatorForm>
             </Dialog> 
