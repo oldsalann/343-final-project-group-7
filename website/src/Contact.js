@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { HashRouter as Router, Route, Link, Switch, Redirect } from "react-router-dom";
 import firebase from 'firebase';
 import mapboxgl from 'mapbox-gl'
+import 'bootstrap/dist/css/bootstrap.min.css'
 import ReactMapboxGl, { Layer, Feature, Popup } from "react-mapbox-gl";
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
@@ -178,7 +179,7 @@ export class Contact extends Component {
     return(
       <MuiThemeProvider>
         <Router>
-        <div>
+        <div className='container'>
           
           <Card style={{position:"fixed",
                         margin:100,
@@ -195,9 +196,6 @@ export class Contact extends Component {
                 ref="form"
             >
             <CardText style={{marginTop:5, marginLeft:20, marginBottum: 20, marginRight: 20}}>
-              <p style={{fontFamily: 'Philosopher'}}>Email : </p>
-              <br></br>
-              <p style={{fontFamily: 'Philosopher'}}>Phone : </p>
               <TextValidator
                 hintText="Name"
                 floatingLabelText="Name"
@@ -242,15 +240,15 @@ export class Contact extends Component {
               />
             </CardText>
             <RaisedButton label={
-                              (!this.state.fill && <a style={{fontFamily: 'Philosopher', color: "red"}}>Fill out everything! <i className="far fa-paper-plane"></i></a>)
-                              ||(this.state.submitted && <a style={{fontFamily: 'Philosopher'}}>Your form is Submitted! <i className="far fa-paper-plane"></i></a>)
-                              || (!this.state.submitted && <a style={{fontFamily: 'Philosopher'}}>Submit <i className="far fa-paper-plane"></i></a>) 
+                              (!this.state.fill && <a style={{fontFamily: 'Comfortaa', color: "red"}}>Fill out everything! <i className="far fa-paper-plane"></i></a>)
+                              ||(this.state.submitted && <a style={{fontFamily: 'Comfortaa'}}>Your form is Submitted! <i className="far fa-paper-plane"></i></a>)
+                              || (!this.state.submitted && <a style={{fontFamily: 'Comfortaa'}}>Submit <i className="far fa-paper-plane"></i></a>) 
                               
                           }
                           disabled={this.state.submitted} 
                           style={{marginTop:5, marginLeft:30, marginBottum: 30, marginRight: 30}} 
                           onClick={(e) => this.postForm(e) }/>
-            <RaisedButton label={<a style={{fontFamily: 'Philosopher'}}>Admin</a>} onClick={this.handleOpen} />
+            <RaisedButton label={<a style={{fontFamily: 'Comfortaa'}}>Admin</a>} onClick={this.handleOpen} />
             </ValidatorForm>
             <Dialog
               title="Admin login"
