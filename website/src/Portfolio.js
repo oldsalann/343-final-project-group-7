@@ -28,7 +28,7 @@ export class Portfolio extends Component {
 }
 
 
-const photos = [];
+// const photos = [];
 export class ImageContainer extends Component {
     constructor(props) {
         super(props);
@@ -66,7 +66,10 @@ export class ImageContainer extends Component {
         allImages.map((imgRef, i) => {
             this.getUrl(imgRef);
             console.log("imgRef", imgRef);
+
         });
+
+
 
         // console.log()
         // allImages.forEach(imgURL => {
@@ -79,20 +82,44 @@ export class ImageContainer extends Component {
     }
     getUrl(imgRef) {
         let setUrl = undefined;
+
         imgRef.getDownloadURL().then((url) => {
             setUrl = url;
-            console.log(setUrl)
+            // console.log(setUrl)
             let newArray = this.state.url.slice();
             newArray.push(setUrl);
-            console.log(newArray);
+            let newPhotoArray = this.state.photos;
+            newPhotoArray.push({ "src": url, "width": 3, "height": 2, "alt": "hi" });
+            // console.log(newArray);
             this.setState({
                 url: newArray,
-                photos: photos.push({ "src": setUrl, "width": 3, "height": 2 }),
+                photos: newPhotoArray
             })
+            // console.log("url", url);
+
+            // console.log("URL length", this.state.url.length);
+            console.log("neew photos aadded", this.state.photos);
         }).catch(function (error) {
             console.error(error);
         });
+        console.log("RUL length", this.state.url);
+        // this.addPhotos();
+
     }
+
+    // addPhotos() {
+    //     if (this.state.url.length != 0) {
+    //         console.log("RUL", this.state.url);
+    //         this.state.url.forEach((url) => {
+    //             let newArray = [];
+    //             newArray.push({ "src": url, "width": 3, "height": 2 });
+    //             this.setState({
+    //                 photos: newArray
+    //             })
+    //         });
+
+    //     }
+    // }
 
 
     openLightbox(event, obj) {
@@ -129,9 +156,9 @@ export class ImageContainer extends Component {
 
                 } */}
 
-                <Gallery photos={photos} onClick={this.openLightbox} />
+                <Gallery photos={this.state.photos} onClick={this.openLightbox} />
 
-                <Lightbox images={photos}
+                <Lightbox images={this.state.photos}
                     onClose={this.closeLightbox}
                     onClickPrev={this.gotoPrevious}
                     onClickNext={this.gotoNext}
