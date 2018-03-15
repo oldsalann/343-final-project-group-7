@@ -7,6 +7,7 @@ import firebase from 'firebase';
 import { Form, Icon, Input, Button, Checkbox, Menu } from 'antd';
 import { Contact } from './Contact';
 import { About } from './About';
+import { Animation } from './animation';
 import Admin from './Admin';
 import { Homepage } from './Homepage';
 import { Portfolio } from './Portfolio';
@@ -103,7 +104,7 @@ class App extends Component {
                     mode="horizontal"
                 >
                   <Menu.Item key="home">
-                    <Link style={{display: 'inline-block'}} to="/" className="brand">Bryan Nakata</Link>
+                    <Link style={{display: 'inline-block'}} to="/" className="brand"> <Animation /> </Link>
                   </Menu.Item>
                   <Menu.Item style={{float: 'right'}} key="contact">
                     <Icon type="form" /><Link style={{display: 'inline-block'}}to="/Contact" className="brand">Contact</Link>
