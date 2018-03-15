@@ -10,7 +10,7 @@ export class Animation extends React.Component {
       <div>
         { <MtSvgLines
               animate={ true }
-              duration={ 2000 }
+              duration={ 3000 }
               stagger={ 100 }
               timing="ease-in"
               playback="forwards"

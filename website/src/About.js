@@ -11,6 +11,7 @@ import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import avatar from './img/avatar.jpg';
 import './About.css';
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 export class About extends Component {
     constructor(props) {
@@ -67,7 +68,7 @@ export class AboutCard extends Component {
     render() {
         return (
             <MuiThemeProvider>
-                <div>
+                <div className='container'>
                     <Card style={{
                         position: "fixed",
                         margin: 100,
@@ -82,7 +83,7 @@ export class AboutCard extends Component {
                             style={{ marginTop: 20, marginLeft: 20, marginBottum: 20, marginRight: 20 }}
                         />
                         <CardText style={{ marginTop: 5, marginLeft: 20, marginBottum: 20, marginRight: 20 }}>
-
+                        <div>
                             <p>
                                 Hello!
                     <br></br>
@@ -93,12 +94,12 @@ export class AboutCard extends Component {
                                 &ensp;&ensp;&ensp;&ensp;&ensp;
                                 Currently I am studying at the University of Washington and majoring in communications journalism. I also work as a digital media producer at the University of Washington, Seattle Seahawks and in the summer, CBS Seattle. In my current and past jobs, I have created videos on multiple topics such as highlighting undocumented student immigrants, covering MLK week, telling the stories of students, filming football stars, and more. As a photographer, I do events, creative images along with portraits. If you are looking for a hardworking photographer or cinematographer with plenty of experience and a positive attitude, please contact me. Thank you for looking at my page and I hope to hear from you soon!
                     </p>
-
+                    </div>
 
                         </CardText>
                     </Card>
                 </div>
-                <img className="image" style={{ border: "none", width: "100%" }} src={this.props.src} data-lightbox="roadtrip" data-title="My caption" alt="test" />
+                <img className="image img-fluid" style={{ border: "none", width: "100%" }} src={this.props.src} data-lightbox="roadtrip" data-title="My caption" alt="test" />
             </MuiThemeProvider>
 
         );

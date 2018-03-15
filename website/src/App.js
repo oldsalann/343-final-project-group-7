@@ -16,6 +16,7 @@ import ReactMapboxGl, { Layer, Feature, Popup } from "react-mapbox-gl";
 import ReactTable from "react-table";
 import "react-table/react-table.css";
 
+
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
 
@@ -79,26 +80,25 @@ class App extends Component {
           <div>
             <Router>
               <div>
-                {/*
-                <nav className="navbar fixed-top navbar-expand-md navbar-toggleable-md navbar-dark bg-dark">
+                {
+/*                 <nav className="navbar fixed-top navbar-expand-md navbar-toggleable-md navbar-light bg-light">
                   <button type="button" className="navbar-toggler" data-toggle="collapse" data-target="#navbarNav">
                   <span className="navbar-toggler-icon"></span>
                   </button>
                   <div className='collapse navbar-collapse' id='navbarNav'>
                     <ul className='navbar-nav mr-auto'>
-                      <li style={{fontFamily: 'Philosopher'}} className='navbar-brand mr-3' id='font'>Bryan Nakata</li>
+                    <Link style={{display: 'inline-block'}} to="/" className="brand"> <Animation /> </Link>
                     </ul>
                     <ul className='navbar-nav mr-right'>
-                      <li style={{fontFamily: 'Philosopher'}} className='nav-item mr-3 mt-auto mb-auto'><Link to="/" className="brand">Home</Link></li>
-                      <li style={{fontFamily: 'Philosopher'}} className='nav-item mr-3 mt-auto mb-auto'><Link to="/About" className="brand">About</Link></li>
-                      <li style={{fontFamily: 'Philosopher'}} className='nav-item mr-3 mt-auto mb-auto'><Link to="/Contact" className="brand">Contact</Link></li>
-                      <li style={{fontFamily: 'Philosopher'}} className='nav-item mt-auto mb-auto'><Link to="/Portfolio" className="brand">Portfolio</Link></li>
+                    <Icon type="picture" className="mr-2 mt-1"/><Link style={{display: 'inline-block'}} to="/Portfolio" className="brand mr-3">Portfolio</Link>
+                    <Icon type="user" className="mr-2 mt-1"/><Link style={{display: 'inline-block'}} to="/About" className="brand mr-3">About</Link>
+                    <Icon type="form" className="mr-2 mt-1"/><Link style={{display: 'inline-block'}}to="/Contact" className="brand mr-3">Contact</Link>
                     </ul>
                   </div>
-                </nav>
-                */}
+                </nav> */
+                }
                 
-                <Menu 
+                {<Menu 
                     onClick={this.handleClick}
                     selectedKeys={[this.state.current]}
                     mode="horizontal"
@@ -116,7 +116,7 @@ class App extends Component {
                   <Menu.Item style={{float: 'right'}} key="portfolio">
                     <Icon type="picture" /><Link style={{display: 'inline-block'}} to="/Portfolio" className="brand">Portfolio</Link>
                   </Menu.Item>
-                </Menu>
+                </Menu>}
                 <div className='container-fluid' style={{padding:0}}>
                   <Switch>
                     <Route exact path="/" component={Homepage} />

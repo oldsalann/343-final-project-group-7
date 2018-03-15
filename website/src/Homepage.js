@@ -7,6 +7,7 @@ import firebase from 'firebase';
 import { Form, Icon, Input, Button, Checkbox } from 'antd';
 import AtvImg from 'react-img-atv';
 import { withRouter } from 'react-router-dom';
+import BackgroundImage from 'react-background-image-loader';
 
 
 const rootDivStyle = {
@@ -29,6 +30,7 @@ const rootDivStyle = {
 
     render() {
       return(
+<BackgroundImage src='https://firebasestorage.googleapis.com/v0/b/info343-final-1383b.appspot.com/o/images%2F28821832_10211716205724476_361433538_o.jpg?alt=media&token=6253d35f-90f9-428d-8e74-53eb745f423f'>
         <div style={rootDivStyle} onClick={this.handleClick}>
           { <AtvImg
             layers={[
@@ -41,6 +43,8 @@ const rootDivStyle = {
             style={{ width: 900, height: 300 }}
           />    }
         </div>
+        <img className="image img-fluid" style={{width: "100%", height:"100%" }} src='https://firebasestorage.googleapis.com/v0/b/info343-final-1383b.appspot.com/o/images%2F28821832_10211716205724476_361433538_o.jpg?alt=media&token=6253d35f-90f9-428d-8e74-53eb745f423f' data-lightbox="roadtrip" data-title="My caption" alt="test" />
+        </BackgroundImage>
       )}
   }
   
