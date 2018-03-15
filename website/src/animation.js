@@ -4,6 +4,7 @@ import MtSvgLines from 'react-mt-svg-lines';
 import SvgSignature from './signature'
 import './App.css';
 
+// The component which handles the animation in the navbar, the top left corner
 export class Animation extends React.Component {
   render() {
     return(

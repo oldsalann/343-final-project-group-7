@@ -98,7 +98,7 @@ class App extends Component {
                 </nav> */
                 }
                 
-                {<Menu 
+                {<Menu // Navbar 
                     onClick={this.handleClick}
                     selectedKeys={[this.state.current]}
                     mode="horizontal"
@@ -137,9 +137,4 @@ class App extends Component {
   }
 }
 
-
-// for visual purposes
-class Nav extends Component {
-  
-}
 export default App;

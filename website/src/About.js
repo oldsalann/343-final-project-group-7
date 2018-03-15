@@ -20,6 +20,7 @@ export class About extends Component {
             url: ''
         };
     }
+    // Get all the images from firebase
     componentDidMount() {
         let storage = firebase.storage();
         let storageRef = storage.ref();
@@ -41,7 +42,7 @@ export class About extends Component {
         this.getUrl(indexedVal);
     }
 
-    // function used from 'MDN web docs'
+    // function used from 'MDN web docs'. Selects a random number to help choose an image
     getRandomInt(min, max) {
         min = Math.ceil(min);
         max = Math.floor(max);
@@ -59,11 +60,12 @@ export class About extends Component {
     }
     render() {
         return (
-            <AboutCard src={this.state.url} />
+            <AboutCard src={this.state.url} /> // Renders the About card
         );
     }
 }
 
+// Creates the about card with the different sections
 export class AboutCard extends Component {
     render() {
         return (

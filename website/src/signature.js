@@ -1,5 +1,7 @@
 import React from 'react'
 
+
+// The paths for the svg of the logo name in the navbar. Helps the package decide how to draw the logo
 const SvgSignature = () => {
   return (
 <svg width="100px" height="30px" version="1.1" viewBox="70 18 50 50" xmlns="http://www.w3.org/2000/svg">
