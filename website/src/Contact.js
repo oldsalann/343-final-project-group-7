@@ -39,15 +39,17 @@ export class Contact extends Component {
     
   }
 
-  
+  // Open admin login form 
   handleOpen = () => {
     this.setState({open: true});
   };
 
+  // Close admin login form  
   handleClose = () => {
     this.setState({open: false});
   };
 
+  // Change form value depend on the user input 
   handleChange(event) {
     let value = event.target.value;
     let field = event.target.name;
@@ -56,12 +58,14 @@ export class Contact extends Component {
     this.setState(change);
   }
 
+  // Show success submit button 
   handleSubmit() {
     this.setState({ submitted: true }, () => {
         setTimeout(() => this.setState({ submitted: false }), 5000);
     });
   }
 
+  // Validation for the user fill out everything 
   fillOut() {
     if (this.state.name == '' || this.state.email == '' || this.state.subject == '' || this.state.message == '') {
       this.setState({ fill: false }, () => {
@@ -74,6 +78,7 @@ export class Contact extends Component {
     }
   }
 
+  // Sign in admin page 
   handleSignIn(adminMail, password) {
     firebase.auth().signInWithEmailAndPassword(adminMail, password)
         .catch(err => {
@@ -95,6 +100,7 @@ export class Contact extends Component {
       
   }
 
+  // Add form information to database 
   postForm(e) {
     e.preventDefault();
     this.fillOut()
@@ -115,6 +121,7 @@ export class Contact extends Component {
     this.clearMessage();
   }
 
+  // reflesh message after submit 
   clearMessage() {
     this.setState({
         name: '',
@@ -128,6 +135,7 @@ export class Contact extends Component {
     });
   }
 
+  // Password match function 
   componentWillMount() {
     ValidatorForm.addValidationRule('isPasswordMatch', (value) => {
         if (value !== this.state.password) {

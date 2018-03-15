@@ -25,6 +25,7 @@ class Admin extends Component {
         }
     }
 
+    // get data from firebase database 
     componentDidMount() {
         this.dataRef = firebase.database().ref('form/');
         let datas = []
@@ -42,6 +43,7 @@ class Admin extends Component {
         console.log(this.state.data);
     }
 
+    // Sign out control 
     handleSignOut() {
         firebase.auth().signOut().then(
             () => {
@@ -50,15 +52,19 @@ class Admin extends Component {
         );
     }
 
+    // Image upload 
     handleUploadStart = () => this.setState({isUploading: true, progress: 0})
 
+    // Image upload progress 
     handleProgress = (progress) => this.setState({progress})
 
+    // Catch error whem uoloading image
     handleUploadError = (error) => {
         this.setState({isUploading: false});
         console.error(error);
     }
 
+    //  Success upload
     handleUploadSuccess = (filename) => {
         this.setState({progress: 100, isUploading: false});
         
@@ -123,6 +129,7 @@ class Admin extends Component {
     }
 }
 
+// Create data table 
 class MakeDataTable extends Component {
     render(){
         return(
