@@ -9,8 +9,6 @@ import { Form, Icon, Input, Button, Checkbox } from 'antd';
 import { render } from 'react-dom';
 import Gallery from 'react-photo-gallery';
 import Lightbox from 'react-images';
-import { Gallery as MobileGallery } from 'react-sleek-photo-gallery';
-import styles from 'react-sleek-photo-gallery/dist/style.css';
 
 
 

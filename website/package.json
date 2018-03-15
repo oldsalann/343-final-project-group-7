@@ -2,12 +2,14 @@
   "name": "website",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://staff.washington.edu/oazeemi/info/343-final-project-group-7/",
   "dependencies": {
     "ajv": "^6.2.1",
     "antd": "^3.3.0",
     "bootstrap": "^4.0.0",
     "choreographer-js": "^1.1.0",
     "firebase": "^4.11.0",
+    "gh-pages": "^1.1.0",
     "google-map-react": "^0.32.0",
     "jquery": "^3.3.1",
     "lightbox2": "^2.10.0",
@@ -36,6 +38,8 @@
     "react-table": "^6.8.0"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
