@@ -14,6 +14,7 @@ import styles from 'react-sleek-photo-gallery/dist/style.css';
 
 
 
+//Class holding photographer's photos
 export class Portfolio extends Component {
     render() {
         let storage = firebase.storage();
@@ -28,14 +29,17 @@ export class Portfolio extends Component {
 }
 
 
-// const photos = [];
+//Overall class handling inserting photos from firebase and displaying them on the webpage
 export class ImageContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
             url: [],
             currentImage: 0,
-            photos: []
+            photos: [],
+            columns: 3,
+            width: 3,
+            height: 2
 
         }
         this.closeLightbox = this.closeLightbox.bind(this);
@@ -68,77 +72,58 @@ export class ImageContainer extends Component {
             console.log("imgRef", imgRef);
 
         });
-
-
-
-        // console.log()
-        // allImages.forEach(imgURL => {
-        //     this.setState({
-        //         photos: photos.push({ "src": imgURL, "width": 4, "height": 6 }),
-        //     });
-        //     console.log("photos", photos);
-        // })
-
     }
+
+    //Pushes the url of the photos into the photo array
     getUrl(imgRef) {
         let setUrl = undefined;
 
         imgRef.getDownloadURL().then((url) => {
             setUrl = url;
-            // console.log(setUrl)
+
             let newArray = this.state.url.slice();
             newArray.push(setUrl);
             let newPhotoArray = this.state.photos;
-            newPhotoArray.push({ "src": url, "width": 3, "height": 2, "alt": "hi" });
-            // console.log(newArray);
+            newPhotoArray.push({ "src": url, "width": this.state.width, "height": this.state.height });
             this.setState({
                 url: newArray,
                 photos: newPhotoArray
             })
-            // console.log("url", url);
 
-            // console.log("URL length", this.state.url.length);
-            console.log("neew photos aadded", this.state.photos);
         }).catch(function (error) {
             console.error(error);
         });
-        console.log("RUL length", this.state.url);
-        // this.addPhotos();
 
     }
 
-    // addPhotos() {
-    //     if (this.state.url.length != 0) {
-    //         console.log("RUL", this.state.url);
-    //         this.state.url.forEach((url) => {
-    //             let newArray = [];
-    //             newArray.push({ "src": url, "width": 3, "height": 2 });
-    //             this.setState({
-    //                 photos: newArray
-    //             })
-    //         });
-
-    //     }
-    // }
-
-
+    //Handles opening of photo
     openLightbox(event, obj) {
         this.setState({
             currentImage: obj.index,
             lightboxIsOpen: true,
+            columns: 3
         });
     }
+
+    //Handles closing of photo
     closeLightbox() {
         this.setState({
             currentImage: 0,
             lightboxIsOpen: false,
+            columns: 3,
+            width: 3,
+            height: 2
         });
     }
+
+    //Handles going to previous photo
     gotoPrevious() {
         this.setState({
             currentImage: this.state.currentImage - 1,
         });
     }
+
+    //Handles going to next photo
     gotoNext() {
         this.setState({
             currentImage: this.state.currentImage + 1,
@@ -149,14 +134,16 @@ export class ImageContainer extends Component {
     render() {
         return (
             <div>
-                {/* {this.state.url !== '' &&
+                {/*
+                Was originally here by Nick
+                {this.state.url !== '' &&
                     this.state.url.map((item, i) => {
                         return (<ImageCard key={"key-" + i} src={item} />);
                     })
 
                 } */}
 
-                <Gallery photos={this.state.photos} onClick={this.openLightbox} />
+                <Gallery photos={this.state.photos} onClick={this.openLightbox} columns={this.state.columns} />
 
                 <Lightbox images={this.state.photos}
                     onClose={this.closeLightbox}
@@ -170,6 +157,8 @@ export class ImageContainer extends Component {
     }
 }
 
+
+//Made by Nick but not used anymore
 export class ImageCard extends Component {
     render() {
         const containerStyle = {
